@@ -23,11 +23,12 @@ jobs:
         
       - name: Install godot
         run: sudo snap install --classic godot
-
+        
+        # Runs a set of commands using the runners shell
+      - name: Build Linux/X11
+        run: godot --export "Linux/X11" build/game-linux
+      
       - name: Build all
         uses: actions/upload-artifact@v1
         with:
             name: build/game-linux
-        # Runs a set of commands using the runners shell
-      - name: Build Linux/X11
-        run: godot --export "Linux/X11" build/game-linux
