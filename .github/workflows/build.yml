@@ -22,7 +22,7 @@ jobs:
         uses: actions/checkout@v2
         
       - name: Install godot
-        run: sudo snap install godot3
+        run: sudo snap install godot
 
       - name: Build all
         uses: actions/upload-artifact@v1
