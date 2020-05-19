@@ -1,0 +1,37 @@
+# This is a basic workflow to help you get started with Actions
+
+name: Build binaries
+
+# Controls when the action will run. Triggers the workflow on push or pull request
+# events but only for the master branch
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  # This workflow contains a single job called "build"
+  build:
+      name: Build
+      runs-on: [ubuntu-18.04]
+      steps:
+
+      - name: Checkout
+        uses: actions/checkout@v2
+        
+      - name: Install godot
+        run: |
+          wget https://downloads.tuxfamily.org/godotengine/3.2.1/Godot_v3.2.1-stable_linux_headless.64.zip -O x.zip
+          unzip x.zip
+          
+        
+        # Runs a set of commands using the runners shell
+      - name: Build Linux/X11
+        run: ./Godot_v3.2.1-stable_linux_headless.64 --export "Linux/X11" build/game-linux
+      
+      - name: Build all
+        uses: actions/upload-artifact@v1
+        with:
+            name: build/game-linux
